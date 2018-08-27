@@ -1,24 +1,29 @@
 <template>
-    <div style="margin: 30px">
+    <div class="hero is-fullheight" style="margin: 30px">
         <masonry
-            :cols="masonry.columns"
-            :gutter="masonry.gutter">
-            <div v-for="(item, index) in items" :key="index">
-                <div style="margin: 10px" class="card">
-                    <div class="card-image">
-                        <figure class="image is-4by3">
-                            <img :src="item.image[3]['#text']" alt="cover image">
-                        </figure>
-                    </div>
-                    <div class="card-content">
-                        <div class="media">
-                            <div class="media-content">
-                                <p class="title is-6">{{ item.name }}</p>
+                :cols="masonry.columns"
+                :gutter="masonry.gutter">
+            <template v-for="(item, index) in items">
+                <router-link :key="index" tag="a" :to="`/artist/${item.artist.name}/${item.name}`">
+                    <div :style="{
+                      marginBottom: masonry.gutter.default,
+                      marginTop: masonry.gutter.default
+                    }" class="card">
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <img :src="item.image[3]['#text']" alt="Cover image">
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-content">
+                                    <h1 class="title is-6">{{ item.name }}</h1>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </router-link>
+            </template>
         </masonry>
     </div>
 </template>
@@ -31,8 +36,15 @@ export default {
   data () {
     return {
       masonry: {
-        columns: 3,
-        gutter: 10
+        columns: {
+          default: 6,
+          1000: 3,
+          700: 2,
+          400: 1
+        },
+        gutter: {
+          default: '20px'
+        }
       }
     }
   },
@@ -49,6 +61,30 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
+    @keyframes appear {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    }
+
+    .card {
+        animation-name: appear;
+        animation-duration: 0.6s;
+
+        &:hover {
+            -webkit-transform: scale(1.05);
+            -ms-transform: scale(1.05);
+            transform: scale(1.05);
+            transition-duration: 0.5s;
+        }
+    }
 
 </style>

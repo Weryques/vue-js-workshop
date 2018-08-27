@@ -20,6 +20,18 @@ export const searchArtist = ({commit}, artist) => {
       commit('setSearchResult', response.data.results)
     })
     .catch(error => {
-      console.log(error)
+      console.error(error)
+    })
+}
+
+export const fetchArtistInfo = ({commit}, artist) => {
+  let query = `?method=artist.getinfo&artist=${artist}`
+
+  return lastFM.get(`/${query}`)
+    .then(response => {
+      commit('setArtistInfo', response.data.artist)
+    })
+    .catch(error => {
+      console.error(error)
     })
 }

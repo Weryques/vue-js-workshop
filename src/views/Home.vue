@@ -5,25 +5,23 @@
     </div>
     <div v-else>
       <header>
-        <section class="hero is-primary">
+        <section class="hero is-dark">
           <div class="hero-head">
             <nav class="navbar">
               <div class="container">
                 <div class="navbar-brand has-text-centered">
-                  <h1 class="has-text-white title navbar-item">MUSIC FINDER</h1>
+                  <router-link to="/" tag="a" class="has-text-white title navbar-item">MUSIC FINDER</router-link>
                 </div>
               </div>
             </nav>
           </div>
 
-          <!-- Hero content: will be in the middle -->
           <div class="hero-body">
             <div class="container has-text-centered">
               <simple-search />
             </div>
           </div>
 
-          <!-- Hero footer: will stick at the bottom -->
           <div class="hero-foot">
             <nav class="tabs">
               <div class="container">

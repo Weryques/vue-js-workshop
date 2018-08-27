@@ -6,8 +6,9 @@
                 v-model="anyText"
                 :loading="isSearching"
                 :data="searchResult"
-                placeholder="Search artist"
+                placeholder="Search and select a artist"
                 field="name"
+                icon="magnify"
                 @select="(option) => selected = option">
                 <template slot-scope="props">
                     <div class="media">
