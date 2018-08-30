@@ -4,14 +4,17 @@
                 :cols="masonry.columns"
                 :gutter="masonry.gutter">
             <template v-for="(item, index) in items">
-                <router-link :key="index" tag="a" :to="`/artist/${item.artist.name}/${item.name}`">
+                <router-link
+                        :key="index"
+                        tag="a"
+                        :to="`/artist/${item.artist.name.replace(/\//g, '%2F').replace(/#/g, '%23')}/${item.name.replace(/\//g, '%2F').replace(/#/g, '%23')}`">
                     <div :style="{
                       marginBottom: masonry.gutter.default,
                       marginTop: masonry.gutter.default
                     }" class="card">
                         <div class="card-image">
                             <figure class="image is-4by3">
-                                <img :src="item.image[3]['#text']" alt="Cover image">
+                                <img :src="item.image[3]['#text'] ? item.image[3]['#text'] : albumPlaceholderImage" alt="Cover image">
                             </figure>
                         </div>
                         <div class="card-content">
@@ -45,7 +48,8 @@ export default {
         gutter: {
           default: '20px'
         }
-      }
+      },
+      albumPlaceholderImage: require('@/assets/placeholder-album.png')
     }
   },
   methods: {
@@ -79,11 +83,15 @@ export default {
         animation-name: appear;
         animation-duration: 0.6s;
 
+        transition-duration: 0.3s;
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+
         &:hover {
             -webkit-transform: scale(1.05);
             -ms-transform: scale(1.05);
             transform: scale(1.05);
-            transition-duration: 0.5s;
         }
     }
 

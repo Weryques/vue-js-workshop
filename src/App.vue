@@ -6,7 +6,7 @@
 
 <style lang="scss">
   body {
-    background-color: #4b4b4b;
+    background-color: #454647;
     min-height: 100vh;
   }
 </style>

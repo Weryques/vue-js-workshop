@@ -3,7 +3,7 @@
         <div v-if="albumInfo" class="card">
             <div v-if="albumInfo.image" class="card-image">
                 <figure class="image is-4by3">
-                    <img :src="albumInfo.image[5]['#text']" alt="Cover image">
+                    <img :src="albumInfo.image[5]['#text'] ? albumInfo.image[5]['#text'] : albumPlaceholderImage" alt="Cover image">
                 </figure>
             </div>
             <div class="card-content">
@@ -59,6 +59,11 @@
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
+  data () {
+    return {
+      albumPlaceholderImage: require('@/assets/placeholder-album.png')
+    }
+  },
   created () {
     this.fetchAlbumInfo({
       albumName: this.$route.params.albumName,

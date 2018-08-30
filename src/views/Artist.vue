@@ -19,7 +19,7 @@
                     <div class="column">
                         <router-view />
                     </div>
-                    <div class="column is-7">
+                    <div class="column is-8">
                         <div class="media box">
                             <div class="media-content">
                                 <div class="content has-text-justified">
@@ -37,7 +37,7 @@
                                         <li v-for="(similarArtist, index) in artistInfo.similar.artist" :key="index">
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <img width="32" :src="similarArtist.image[0]['#text']">
+                                                    <img width="32" :src="similarArtist.image[0]['#text'] ? similarArtist.image[0]['#text'] : artistPlaceholderImage">
                                                 </div>
                                                 <div class="media-content">
                                                     {{ similarArtist.name }}
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <figure v-if="artistInfo.image" class="image is-128x128 media-right">
-                                <img :src="artistInfo.image[4]['#text']" alt="Artist">
+                                <img :src="artistInfo.image[4]['#text'] ? artistInfo.image[4]['#text'] : artistPlaceholderImage" alt="Artist">
                             </figure>
                         </div>
                     </div>
@@ -62,6 +62,11 @@
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
+  data () {
+    return {
+      artistPlaceholderImage: require('@/assets/placeholder-artist.jpg')
+    }
+  },
   created () {
     this.fetchArtistInfo(this.$route.params.artistName)
   },
