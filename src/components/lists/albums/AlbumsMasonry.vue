@@ -5,6 +5,7 @@
                 :gutter="masonry.gutter">
             <template v-for="(item, index) in items">
                 <router-link
+                        v-if="item.name != '(null)'"
                         :key="index"
                         tag="a"
                         :to="`/artist/${item.artist.name.replace(/\//g, '%2F').replace(/#/g, '%23')}/${item.name.replace(/\//g, '%2F').replace(/#/g, '%23')}`">
